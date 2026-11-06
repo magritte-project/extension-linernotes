@@ -1,4 +1,4 @@
-import { ExtensionHost } from "@magritte/sdk"
+import { beginForwardingMeaningfulUIEvents, ExtensionHost } from "@magritte/sdk"
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query"
 
 import "@magritte/fonts/fira-go.css"
@@ -33,6 +33,9 @@ try {
 
     // Handshake with the extension host
     const extensionHost = await ExtensionHost.connect({ extensionId: "magritte.linernotes" })
+
+    // Set up UI event forwarding
+    await beginForwardingMeaningfulUIEvents(extensionHost)
 
     // Set up tanstack query. Nothing here changes while the panel is open, and
     // refetching on focus would spend the MusicBrainz rate limit for nothing
